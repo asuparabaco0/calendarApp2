@@ -1,0 +1,40 @@
+import {
+    ADD_SCHEDULE_CLOSE_DIALOG,
+    ADD_SCHEDULE_OPEN_DIALOG,
+    ADD_SCHEDULE_SET_VALUE,
+    ADD_SCHEDULE_START_EDIT
+} from "./actions"
+
+import dayjs from "dayjs"
+const init = {
+    //フォームのデータとdialogが開いているかどうかの二つの状態が必要
+    form: {
+        title: "",
+        description: "",
+        date: dayjs(),
+        location: ""
+    },
+    isDialogOpen: false,
+    isStartEdit: false
+};
+
+const addScheduleReducer=(state=init, action)=>{
+    const {type, payload} = action;
+
+    switch (type) {
+        case ADD_SCHEDULE_SET_VALUE:
+            //現状のstateにformを追加→現在のformに対して新しいデータを展開
+            return { ...state, form: { ...state.form, ...payload } };
+        case ADD_SCHEDULE_OPEN_DIALOG:
+            return { ...state, isDialogOpen: true };
+        case ADD_SCHEDULE_CLOSE_DIALOG:
+            //完全初期化
+            return init;
+        case ADD_SCHEDULE_START_EDIT:
+            return {...state, isStartEdit:true}
+        default:
+            return state;
+    }
+};
+
+export default addScheduleReducer;

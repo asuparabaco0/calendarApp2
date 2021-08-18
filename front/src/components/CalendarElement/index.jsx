@@ -3,8 +3,8 @@ import { Typography } from "@material-ui/core"
 import dayjs from "dayjs";
 import * as styles from "./style.css";
 import { isSameMonth, isFirstDay, isSameDay, getMonth} from "../../services/calendar";
-
-const CalendarElement = ({ day, month }) => {
+import Schedule from "../Schedule";
+const CalendarElement = ({ day, month, schedules, ...props }) => {
     const isFirstDay = day.date() === 1;
     //当日がどうか判断
     const format = isFirstDay ? "M月D日" : "D";
@@ -30,6 +30,12 @@ const CalendarElement = ({ day, month }) => {
                     {day.format(format)}
                 </span>
             </Typography>
+            <div className={styles.schedules}>
+                {schedules.map(e=>(
+                    //CalendarElementでpropsという変数に残ったpropsを全て格納し、ここでもう一度展開している
+                    <Schedule key={e.id} schedule={e} {...props}/>
+                ))}
+            </div>
         </div>
     );
 };

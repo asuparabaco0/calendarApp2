@@ -8,7 +8,16 @@
   display: inline-block;
   line-height: 24px;
   width: 24px;
-  background-color: #1a73e8;
+  background-color: #3d91ff;
   color: #fff;
   border-radius: 50%;
 }
+
+.schedules {
+  overflow:auto;
+  height: calc(18vh - 30px);
+}
+
+/* .schedules::-webkit-scrollbar {
+  display: none;
+} */
